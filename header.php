@@ -28,17 +28,16 @@
       <div>
          <a href="proveedor.php" class="btn btn-outline-light btn-sm">Proveedor</a>
         <a href="usuario.php" class="btn btn-outline-light btn-sm">Me caso</a>
-     
       </div>
     </div>
   </div>
 
   <!-- NAVBAR FIJA -->
-<nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+  <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
     <div class="container-fluid">
-        <!-- Logo alineado a la izquierda con separación -->
-        <a class="navbar-brand d-flex align-items-center me-5" href="#">
-            <img src="img/logo.png" alt="Bodas Online" class="logo" style="height: 95px;" onerror="this.src='https://via.placeholder.com/150x95?text=Logo+Bodas'">
+        <!-- Logo alineado a la izquierda -->
+        <a class="navbar-brand d-flex align-items-center" href="index.php">
+            <img src="img/logo.png" alt="Bodas Online" class="logo" style="height: 90px;" onerror="this.src='https://via.placeholder.com/150x90?text=Logo'">
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -58,7 +57,7 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Lugares</a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu shadow-sm border-0">
                         <li><a class="dropdown-item" href="#">Restaurantes</a></li>
                         <li><a class="dropdown-item" href="#">Campo</a></li>
                         <li><a class="dropdown-item" href="#">Playa</a></li>
@@ -67,7 +66,7 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Proveedores</a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu shadow-sm border-0">
                         <li><a class="dropdown-item" href="#">Catering</a></li>
                         <li><a class="dropdown-item" href="#">Belleza</a></li>
                         <li><a class="dropdown-item" href="#">Pastelería</a></li>
@@ -85,4 +84,4 @@
             </ul>
         </div>
     </div>
-</nav>
+  </nav>
