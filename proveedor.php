@@ -18,11 +18,11 @@
 
 <main class="proveedor-page">
     <section class="hero-auth py-5">
-        <div class="container d-flex flex-wrap justify-content-center align-items-stretch gap-4">
+        <div class="container-flex">
             <!-- Bloque Izquierdo: Glassmorphism -->
             <div class="glass-card shadow-lg">
                 <h2 class="display-6 fw-bold mb-4">¡Haz crecer tu negocio con Nosotros!</h2>
-                <ul class="text-start d-inline-block ps-0">
+                <ul>
                     <li class="mb-3"><i class="fa-solid fa-check me-2"></i> Recibe Solicitudes de Presupuestos</li>
                     <li class="mb-3"><i class="fa-solid fa-check me-2"></i> Consigue Nuevos Clientes</li>
                 </ul>
