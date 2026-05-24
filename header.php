@@ -28,6 +28,7 @@
       <div>
          <a href="proveedor.php" class="btn btn-outline-light btn-sm">Proveedor</a>
         <a href="usuario.php" class="btn btn-outline-light btn-sm">Me caso</a>
+        <a href="admin.php" class="btn btn-warning btn-sm text-dark fw-bold ms-1 shadow-sm" style="border-radius: 4px;"><i class="fas fa-lock me-1"></i> Admin</a>
       </div>
     </div>
   </div>

@@ -1,3 +1,73 @@
+<?php 
+require_once("conexion.php");
+
+// Helper function to resolve image path
+if (!function_exists('obtenerRutaImagen')) {
+    function obtenerRutaImagen($img) {
+        if (empty($img)) {
+            return 'img/default.jpg';
+        }
+        if (strpos($img, 'http://') === 0 || strpos($img, 'https://') === 0) {
+            return $img;
+        }
+        if (strpos($img, 'img/') === 0 || strpos($img, 'img\\') === 0) {
+            return $img;
+        }
+        return 'img/' . $img;
+    }
+}
+
+// Helper function to resolve category image
+if (!function_exists('obtenerImagenCategoria')) {
+    function obtenerImagenCategoria($nombre) {
+        switch(strtolower(trim($nombre))) {
+            case 'lugares para mi boda':
+            case 'lugares': return 'https://images.pexels.com/photos/169190/pexels-photo-169190.jpeg?auto=compress&cs=tinysrgb&w=400';
+            case 'restaurantes': return 'https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?auto=compress&cs=tinysrgb&w=400';
+            case 'floristería': return 'https://images.pexels.com/photos/931177/pexels-photo-931177.jpeg?auto=compress&cs=tinysrgb&w=400';
+            case 'mobiliario': return 'https://images.pexels.com/photos/276583/pexels-photo-276583.jpeg?auto=compress&cs=tinysrgb&w=400';
+            case 'rentar coche':
+            case 'coches de boda': return 'img/coche.jpg';
+            case 'animadores':
+            case 'animación': return 'img/aniamdor.jpg';
+            case 'food truck': return 'https://images.pexels.com/photos/2233729/pexels-photo-2233729.jpeg?auto=compress&cs=tinysrgb&w=400';
+            case 'mesas de dulces': return 'https://images.pexels.com/photos/1721932/pexels-photo-1721932.jpeg?auto=compress&cs=tinysrgb&w=400';
+            case 'dj':
+            case 'música': return 'https://images.pexels.com/photos/2253843/pexels-photo-2253843.jpeg?auto=compress&cs=tinysrgb&w=400';
+            case 'decorador':
+            case 'decoración': return 'https://images.pexels.com/photos/3419264/pexels-photo-3419264.jpeg?auto=compress&cs=tinysrgb&w=400';
+            case 'joyas': return 'https://images.pexels.com/photos/265906/pexels-photo-265906.jpeg?auto=compress&cs=tinysrgb&w=400';
+            case 'luna de miel': return 'https://images.pexels.com/photos/1024967/pexels-photo-1024967.jpeg?auto=compress&cs=tinysrgb&w=400';
+            default: return 'https://images.pexels.com/photos/1024967/pexels-photo-1024967.jpeg?auto=compress&cs=tinysrgb&w=400';
+        }
+    }
+}
+
+// Obtener las categorías principales (primeras 6)
+$consultaCats6 = "SELECT * FROM categoriastb LIMIT 6";
+$sentenciaCats6 = $conexion->query($consultaCats6);
+$categorias6 = $sentenciaCats6->fetchAll(PDO::FETCH_ASSOC);
+
+// Obtener 12 categorías para el grid inferior
+$consultaCats12 = "SELECT * FROM categoriastb LIMIT 12";
+$sentenciaCats12 = $conexion->query($consultaCats12);
+$categorias12 = $sentenciaCats12->fetchAll(PDO::FETCH_ASSOC);
+
+// Obtener todos los proveedores premium que son visibles
+$consultaPremium = "SELECT * FROM proveedorestb, categoriastb WHERE proveedorestb.idCategoria = categoriastb.idCategoria AND proveedorestb.visible = 1 LIMIT 8";
+$sentenciaPremium = $conexion->query($consultaPremium);
+$proveedoresPremium = $sentenciaPremium->fetchAll(PDO::FETCH_ASSOC);
+
+// Obtener todas las rutas románticas
+$consultaRutas = "SELECT * FROM rutastb";
+$sentenciaRutas = $conexion->query($consultaRutas);
+$rutas = $sentenciaRutas->fetchAll(PDO::FETCH_ASSOC);
+
+// Obtener todas las categorías de trajes
+$consultaTrajes = "SELECT * FROM trajestb";
+$sentenciaTrajes = $conexion->query($consultaTrajes);
+$trajes = $sentenciaTrajes->fetchAll(PDO::FETCH_ASSOC);
+?>
 <?php include_once("header.php"); ?>
 
 <main>
@@ -118,42 +188,14 @@
       <h2 class="titulo-principal text-center mb-5">Disfruta Organizando tu Boda</h2>
       
       <div class="row g-4 justify-content-center text-center mb-5">
+        <?php foreach($categorias6 as $cat): ?>
         <div class="col-6 col-sm-4 col-md-2">
           <div class="categoria-card p-3">
-            <i class="fa-solid fa-camera categoria-icon"></i>
-            <span class="d-block mt-2 fw-semibold">Fotógrafos</span>
+            <i class="fa-solid <?= htmlspecialchars($cat['iconoCategoria'] ?? 'fa-heart') ?> categoria-icon"></i>
+            <span class="d-block mt-2 fw-semibold"><?= htmlspecialchars($cat['nombreCategoria']) ?></span>
           </div>
         </div>
-        <div class="col-6 col-sm-4 col-md-2">
-          <div class="categoria-card p-3">
-            <i class="fa-solid fa-car-side categoria-icon"></i>
-            <span class="d-block mt-2 fw-semibold">Coches de Boda</span>
-          </div>
-        </div>
-        <div class="col-6 col-sm-4 col-md-2">
-          <div class="categoria-card p-3">
-            <i class="fa-solid fa-music categoria-icon"></i>
-            <span class="d-block mt-2 fw-semibold">Música</span>
-          </div>
-        </div>
-        <div class="col-6 col-sm-4 col-md-2">
-          <div class="categoria-card p-3">
-            <i class="fa-solid fa-bus categoria-icon"></i>
-            <span class="d-block mt-2 fw-semibold">Autobuses</span>
-          </div>
-        </div>
-        <div class="col-6 col-sm-4 col-md-2">
-          <div class="categoria-card p-3">
-            <i class="fa-solid fa-champagne-glasses categoria-icon"></i>
-            <span class="d-block mt-2 fw-semibold">Animación</span>
-          </div>
-        </div>
-        <div class="col-6 col-sm-4 col-md-2">
-          <div class="categoria-card p-3">
-            <i class="fa-solid fa-utensils categoria-icon"></i>
-            <span class="d-block mt-2 fw-semibold">Banquetes</span>
-          </div>
-        </div>
+        <?php endforeach; ?>
       </div>
 
       <div class="row align-items-center mb-5">
@@ -231,165 +273,42 @@
     <div class="premium-viewport" id="vpPremium">
       <div class="premium-pista">
         
-        <!-- Tarjeta 1 -->
-        <div class="premium-item">
-          <div class="card-premium" style="background-image: url('https://images.pexels.com/photos/3997391/pexels-photo-3997391.jpeg?auto=compress&cs=tinysrgb&w=600')">
-            <div class="card-gradient"></div>
-            <div class="card-content">
-              <div class="card-top-row d-flex justify-content-between align-items-center">
-                <span class="badge-yellow">PREMIUM</span>
-                <div class="stars-gold">
-                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+        <?php if(count($proveedoresPremium) > 0): ?>
+          <?php foreach($proveedoresPremium as $fila): 
+              $location = 'Granada';
+              if (!empty($fila['seoKeywords'])) {
+                  $parts = explode(',', $fila['seoKeywords']);
+                  if (count($parts) > 1) {
+                      $location = trim($parts[1]);
+                  } else {
+                      $location = trim($parts[0]);
+                  }
+              }
+              $rutaImg = obtenerRutaImagen($fila['imgProveedorP']);
+          ?>
+          <!-- Tarjeta Dinámica -->
+          <div class="premium-item">
+            <div class="card-premium" style="background-image: url('<?= htmlspecialchars($rutaImg) ?>')">
+              <div class="card-gradient"></div>
+              <div class="card-content">
+                <div class="card-top-row d-flex justify-content-between align-items-center">
+                  <span class="badge-yellow">PREMIUM</span>
+                  <div class="stars-gold">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                  </div>
                 </div>
-              </div>
-              <div class="card-info">
-                <h3 class="card-title">Salón de Belleza</h3>
-                <p class="card-location"><i class="fa-solid fa-location-dot me-1"></i> Armilla</p>
-                <a href="#" class="btn-premium-pink">Ver más</a>
+                <div class="card-info">
+                  <h3 class="card-title"><?= htmlspecialchars($fila['nombreProveedor']) ?></h3>
+                  <p class="card-location"><i class="fa-solid fa-location-dot me-1"></i> <?= htmlspecialchars($location) ?></p>
+                  <a href="detalleProveedor.php?idProveedor=<?= $fila['idProveedor'] ?>" class="btn-premium-pink">Ver más</a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-
-        <!-- Tarjeta 2 -->
-        <div class="premium-item">
-          <div class="card-premium" style="background-image: url('https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=600')">
-            <div class="card-gradient"></div>
-            <div class="card-content">
-              <div class="card-top-row d-flex justify-content-between align-items-center">
-                <span class="badge-yellow">PREMIUM</span>
-                <div class="stars-gold">
-                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                </div>
-              </div>
-              <div class="card-info">
-                <h3 class="card-title">Rent Cars</h3>
-                <p class="card-location"><i class="fa-solid fa-location-dot me-1"></i> Plaza de Toro</p>
-                <a href="#" class="btn-premium-pink">Ver más</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tarjeta 3 -->
-        <div class="premium-item">
-          <div class="card-premium" style="background-image: url('https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=600')">
-            <div class="card-gradient"></div>
-            <div class="card-content">
-              <div class="card-top-row d-flex justify-content-between align-items-center">
-                <span class="badge-yellow">PREMIUM</span>
-                <div class="stars-gold">
-                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                </div>
-              </div>
-              <div class="card-info">
-                <h3 class="card-title">Palace Hotel</h3>
-                <p class="card-location"><i class="fa-solid fa-location-dot me-1"></i> Caleta</p>
-                <a href="#" class="btn-premium-pink">Ver más</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tarjeta 4 -->
-        <div class="premium-item">
-          <div class="card-premium" style="background-image: url('https://images.pexels.com/photos/1264210/pexels-photo-1264210.jpeg?auto=compress&cs=tinysrgb&w=600')">
-            <div class="card-gradient"></div>
-            <div class="card-content">
-              <div class="card-top-row d-flex justify-content-between align-items-center">
-                <span class="badge-yellow">PREMIUM</span>
-                <div class="stars-gold">
-                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                </div>
-              </div>
-              <div class="card-info">
-                <h3 class="card-title">Fotógrafo Rafa</h3>
-                <p class="card-location"><i class="fa-solid fa-location-dot me-1"></i> Granada</p>
-                <a href="#" class="btn-premium-pink">Ver más</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tarjeta 5 -->
-        <div class="premium-item">
-          <div class="card-premium" style="background-image: url('https://images.pexels.com/photos/931177/pexels-photo-931177.jpeg?auto=compress&cs=tinysrgb&w=600')">
-            <div class="card-gradient"></div>
-            <div class="card-content">
-              <div class="card-top-row d-flex justify-content-between align-items-center">
-                <span class="badge-yellow">PREMIUM</span>
-                <div class="stars-gold">
-                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                </div>
-              </div>
-              <div class="card-info">
-                <h3 class="card-title">Restaurante Gourmet</h3>
-                <p class="card-location"><i class="fa-solid fa-location-dot me-1"></i> Centro</p>
-                <a href="#" class="btn-premium-pink">Ver más</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tarjeta 6 -->
-        <div class="premium-item">
-          <div class="card-premium" style="background-image: url('https://images.pexels.com/photos/1024960/pexels-photo-1024960.jpeg?auto=compress&cs=tinysrgb&w=600')">
-            <div class="card-gradient"></div>
-            <div class="card-content">
-              <div class="card-top-row d-flex justify-content-between align-items-center">
-                <span class="badge-yellow">PREMIUM</span>
-                <div class="stars-gold">
-                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                </div>
-              </div>
-              <div class="card-info">
-                <h3 class="card-title">Spa & Wellness</h3>
-                <p class="card-location"><i class="fa-solid fa-location-dot me-1"></i> Sierra Nevada</p>
-                <a href="#" class="btn-premium-pink">Ver más</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tarjeta 7 -->
-        <div class="premium-item">
-          <div class="card-premium" style="background-image: url('https://images.pexels.com/photos/169190/pexels-photo-169190.jpeg?auto=compress&cs=tinysrgb&w=600')">
-            <div class="card-gradient"></div>
-            <div class="card-content">
-              <div class="card-top-row d-flex justify-content-between align-items-center">
-                <span class="badge-yellow">PREMIUM</span>
-                <div class="stars-gold">
-                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                </div>
-              </div>
-              <div class="card-info">
-                <h3 class="card-title">Wedding Planner</h3>
-                <p class="card-location"><i class="fa-solid fa-location-dot me-1"></i> Realejo</p>
-                <a href="#" class="btn-premium-pink">Ver más</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tarjeta 8 -->
-        <div class="premium-item">
-          <div class="card-premium" style="background-image: url('https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=600')">
-            <div class="card-gradient"></div>
-            <div class="card-content">
-              <div class="card-top-row d-flex justify-content-between align-items-center">
-                <span class="badge-yellow">PREMIUM</span>
-                <div class="stars-gold">
-                  <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                </div>
-              </div>
-              <div class="card-info">
-                <h3 class="card-title">Joyas Reales</h3>
-                <p class="card-location"><i class="fa-solid fa-location-dot me-1"></i> Alcaicería</p>
-                <a href="#" class="btn-premium-pink">Ver más</a>
-              </div>
-            </div>
-          </div>
-        </div>
+          <?php endforeach; ?>
+        <?php else: ?>
+          <div class="w-100 text-center py-5 text-muted">No hay empresas premium disponibles.</div>
+        <?php endif; ?>
 
       </div>
     </div>
@@ -563,101 +482,19 @@
     <div class="carrusel-viewport" id="rutasViewport">
       <div class="carrusel-pista" id="rutasPista">
         
-        <!-- Tarjeta Ruta 1 -->
+        <?php foreach($rutas as $index => $r): ?>
+        <!-- Tarjeta Ruta Dinámica <?= $index + 1 ?> -->
         <div class="ruta-item">
           <div class="ruta-card-container">
-            <div class="ruta-img-box" style="background-image: url('img/generalife.jpg')">
+            <div class="ruta-img-box" style="background-image: url('<?= htmlspecialchars($r['imgRuta']) ?>')">
               <div class="ruta-hover-overlay">
-                <a href="#" class="btn-ver-mas-ruta">Ver más</a>
+                <a href="detalleRuta.php?idRuta=<?= $r['idRuta'] ?>" class="btn-ver-mas-ruta">Ver más</a>
               </div>
             </div>
-            <h4 class="ruta-nombre-pie">Ruta Generalife</h4>
+            <h4 class="ruta-nombre-pie"><?= htmlspecialchars($r['nombreRuta']) ?></h4>
           </div>
         </div>
-
-        <!-- Tarjeta Ruta 2 -->
-        <div class="ruta-item">
-          <div class="ruta-card-container">
-            <div class="ruta-img-box" style="background-image: url('img/sacromonte.jpg')">
-              <div class="ruta-hover-overlay">
-                <a href="#" class="btn-ver-mas-ruta">Ver más</a>
-              </div>
-            </div>
-            <h4 class="ruta-nombre-pie">Ruta por el Sacromonte</h4>
-          </div>
-        </div>
-
-        <!-- Tarjeta Ruta 3 -->
-        <div class="ruta-item">
-          <div class="ruta-card-container">
-            <div class="ruta-img-box" style="background-image: url('img/catedral.jpg')">
-              <div class="ruta-hover-overlay">
-                <a href="#" class="btn-ver-mas-ruta">Ver más</a>
-              </div>
-            </div>
-            <h4 class="ruta-nombre-pie">Catedral de Granada</h4>
-          </div>
-        </div>
-
-        <!-- Tarjeta Ruta 4 -->
-        <div class="ruta-item">
-          <div class="ruta-card-container">
-           <div class="ruta-img-box" style="background-image: url('img/sanicolas.jpg')">
-              <div class="ruta-hover-overlay">
-                <a href="#" class="btn-ver-mas-ruta">Ver más</a>
-              </div>
-            </div>
-            <h4 class="ruta-nombre-pie">Mirador San Nicolás</h4>
-          </div>
-        </div>
-
-        <!-- Tarjeta Ruta 5 -->
-        <div class="ruta-item">
-          <div class="ruta-card-container">
-            <div class="ruta-img-box" style="background-image: url('img/triunfo.jpg')">
-              <div class="ruta-hover-overlay">
-                <a href="#" class="btn-ver-mas-ruta">Ver más</a>
-              </div>
-            </div>
-            <h4 class="ruta-nombre-pie">Jardines del Triunfo</h4>
-          </div>
-        </div>
-
-        <!-- Tarjeta Ruta 6 -->
-        <div class="ruta-item">
-          <div class="ruta-card-container">
-            <div class="ruta-img-box" style="background-image: url('img/martires.jpg')">
-              <div class="ruta-hover-overlay">
-                <a href="#" class="btn-ver-mas-ruta">Ver más</a>
-              </div>
-            </div>
-            <h4 class="ruta-nombre-pie">Carmen de los Mártires</h4>
-          </div>
-        </div>
-
-        <!-- Tarjeta Ruta 7 -->
-        <div class="ruta-item">
-          <div class="ruta-card-container">
-            <div class="ruta-img-box" style="background-image: url('img/carrera.jpg')">
-              <div class="ruta-hover-overlay">
-                <a href="#" class="btn-ver-mas-ruta">Ver más</a>
-              </div>
-            </div>
-            <h4 class="ruta-nombre-pie">Carrera del Darro</h4>
-          </div>
-        </div>
-
-        <!-- Tarjeta Ruta 8 -->
-        <div class="ruta-item">
-          <div class="ruta-card-container">
-            <div class="ruta-img-box" style="background-image: url('img/sierra.jpg')">
-              <div class="ruta-hover-overlay">
-                <a href="#" class="btn-ver-mas-ruta">Ver más</a>
-              </div>
-            </div>
-            <h4 class="ruta-nombre-pie">Sierra Nevada</h4>
-          </div>
-        </div>
+        <?php endforeach; ?>
 
       </div>
     </div>
@@ -696,15 +533,11 @@
       <!-- Columna de Enlaces Interactivos -->
       <div class="col-lg-3">
         <ul class="nav-trajes">
-          <li class="nav-traje-item active" data-target="novio">
-            <span class="nav-marker">*</span> Traje de Novio
+          <?php foreach($trajes as $index => $t): ?>
+          <li class="nav-traje-item <?= $index == 0 ? 'active' : '' ?>" data-target="<?= htmlspecialchars($t['tipoTraje']) ?>">
+            <span class="nav-marker">*</span> <?= htmlspecialchars($t['nombreTraje']) ?>
           </li>
-          <li class="nav-traje-item" data-target="novia">
-            <span class="nav-marker">*</span> Traje de Novia
-          </li>
-          <li class="nav-traje-item" data-target="invitados">
-            <span class="nav-marker">*</span> Traje de Invitados
-          </li>
+          <?php endforeach; ?>
         </ul>
       </div>
 
@@ -712,44 +545,20 @@
       <div class="col-lg-9 mt-4 mt-lg-0">
         <div class="trajes-grid-container" id="trajesGrid">
           
-          <!-- Tarjeta Novio -->
-          <div class="traje-card-wrapper" id="card-novio">
+          <?php foreach($trajes as $t): ?>
+          <!-- Tarjeta <?= htmlspecialchars($t['nombreTraje']) ?> -->
+          <div class="traje-card-wrapper" id="card-<?= htmlspecialchars($t['tipoTraje']) ?>">
             <div class="traje-card shadow">
-              <img src="img/trajenovio.jpg" alt="Traje de Novio" class="img-traje">
+              <img src="<?= htmlspecialchars($t['imgTraje']) ?>" alt="<?= htmlspecialchars($t['nombreTraje']) ?>" class="img-traje">
               <div class="traje-reveal-overlay">
-                <div class="traje-label">Novio</div>
+                <div class="traje-label"><?= htmlspecialchars(str_replace('Traje de ', '', $t['nombreTraje'])) ?></div>
                 <div class="traje-footer">
-                  <a href="#" class="btn-traje-link shadow-sm">Ver catálogo <i class="fa-solid fa-arrow-right ms-2"></i></a>
+                  <a href="detalleTraje.php?idTraje=<?= $t['idTraje'] ?>" class="btn-traje-link shadow-sm">Ver catálogo <i class="fa-solid fa-arrow-right ms-2"></i></a>
                 </div>
               </div>
             </div>
           </div>
-
-          <!-- Tarjeta Novia -->
-          <div class="traje-card-wrapper" id="card-novia">
-            <div class="traje-card shadow">
-              <img src="img/trajenovia.jpg" alt="Traje de Novia" class="img-traje">
-              <div class="traje-reveal-overlay">
-                <div class="traje-label">Novia</div>
-                <div class="traje-footer">
-                  <a href="#" class="btn-traje-link shadow-sm">Ver catálogo <i class="fa-solid fa-arrow-right ms-2"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Tarjeta Invitados -->
-          <div class="traje-card-wrapper" id="card-invitados">
-            <div class="traje-card shadow">
-              <img src="img/trajes.jpg" alt="Traje de Invitados" class="img-traje">
-              <div class="traje-reveal-overlay">
-                <div class="traje-label">Invitados</div>
-                <div class="traje-footer">
-                  <a href="#" class="btn-traje-link shadow-sm">Ver catálogo <i class="fa-solid fa-arrow-right ms-2"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
+          <?php endforeach; ?>
 
         </div>
       </div>
@@ -967,125 +776,24 @@
     <!-- Grid de Categorías (12 Tarjetas) -->
     <div class="grid-categorias">
       
-      <!-- Categoría 1 -->
+      <?php foreach($categorias12 as $index => $cat): 
+          $rutaImgCat = obtenerImagenCategoria($cat['nombreCategoria']);
+          // Si el nombre de la categoría es largo o queremos formatearlo como el original
+          $nombreCatFormateado = $cat['nombreCategoria'];
+          if (strtolower($cat['nombreCategoria']) == 'lugares') {
+              $nombreCatFormateado = "Lugares para<br>mi Boda";
+          }
+      ?>
+      <!-- Categoría Dinámica <?= $index + 1 ?> -->
       <div class="categoria-card">
         <div class="card-inner">
           <div class="img-circular-wrapper">
-            <img src="https://images.pexels.com/photos/169190/pexels-photo-169190.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Lugares para mi Boda">
+            <img src="<?= htmlspecialchars($rutaImgCat) ?>" alt="<?= htmlspecialchars($cat['nombreCategoria']) ?>">
           </div>
-          <h4 class="categoria-nombre">Lugares para<br>mi Boda</h4>
+          <h4 class="categoria-nombre"><?= $nombreCatFormateado ?></h4>
         </div>
       </div>
-
-      <!-- Categoría 2 -->
-      <div class="categoria-card">
-        <div class="card-inner">
-          <div class="img-circular-wrapper">
-            <img src="https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Restaurantes">
-          </div>
-          <h4 class="categoria-nombre">Restaurantes</h4>
-        </div>
-      </div>
-
-      <!-- Categoría 3 -->
-      <div class="categoria-card">
-        <div class="card-inner">
-          <div class="img-circular-wrapper">
-            <img src="https://images.pexels.com/photos/931177/pexels-photo-931177.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Floristería">
-          </div>
-          <h4 class="categoria-nombre">Floristería</h4>
-        </div>
-      </div>
-
-      <!-- Categoría 4 -->
-      <div class="categoria-card">
-        <div class="card-inner">
-          <div class="img-circular-wrapper">
-            <img src="https://images.pexels.com/photos/276583/pexels-photo-276583.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Mobiliario">
-          </div>
-          <h4 class="categoria-nombre">Mobiliario</h4>
-        </div>
-      </div>
-
-      <!-- Categoría 5 -->
-      <div class="categoria-card">
-        <div class="card-inner">
-          <div class="img-circular-wrapper">
-            <img src="img/coche.jpg" alt="Rentar Coche">
-          </div>
-          <h4 class="categoria-nombre">Rentar Coche</h4>
-        </div>
-      </div>
-
-      <!-- Categoría 6 -->
-      <div class="categoria-card">
-        <div class="card-inner">
-          <div class="img-circular-wrapper">
-            <img src="img/aniamdor.jpg" alt="Animadores">
-          </div>
-          <h4 class="categoria-nombre">Animadores</h4>
-        </div>
-      </div>
-
-      <!-- Categoría 7 -->
-      <div class="categoria-card">
-        <div class="card-inner">
-          <div class="img-circular-wrapper">
-            <img src="https://images.pexels.com/photos/2233729/pexels-photo-2233729.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Food truck">
-          </div>
-          <h4 class="categoria-nombre">Food truck</h4>
-        </div>
-      </div>
-
-      <!-- Categoría 8 -->
-      <div class="categoria-card">
-        <div class="card-inner">
-          <div class="img-circular-wrapper">
-            <img src="https://images.pexels.com/photos/1721932/pexels-photo-1721932.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Mesas de Dulces">
-          </div>
-          <h4 class="categoria-nombre">Mesas de Dulces</h4>
-        </div>
-      </div>
-
-      <!-- Categoría 9 -->
-      <div class="categoria-card">
-        <div class="card-inner">
-          <div class="img-circular-wrapper">
-            <img src="https://images.pexels.com/photos/2253843/pexels-photo-2253843.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Dj">
-          </div>
-          <h4 class="categoria-nombre">Dj</h4>
-        </div>
-      </div>
-
-      <!-- Categoría 10 -->
-      <div class="categoria-card">
-        <div class="card-inner">
-          <div class="img-circular-wrapper">
-            <img src="https://images.pexels.com/photos/3419264/pexels-photo-3419264.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Decorador">
-          </div>
-          <h4 class="categoria-nombre">Decorador</h4>
-        </div>
-      </div>
-
-      <!-- Categoría 11 -->
-      <div class="categoria-card">
-        <div class="card-inner">
-          <div class="img-circular-wrapper">
-            <img src="https://images.pexels.com/photos/265906/pexels-photo-265906.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Joyas">
-          </div>
-          <h4 class="categoria-nombre">Joyas</h4>
-        </div>
-      </div>
-
-      <!-- Categoría 12 -->
-      <div class="categoria-card">
-        <div class="card-inner">
-          <div class="img-circular-wrapper">
-            <img src="https://images.pexels.com/photos/1024967/pexels-photo-1024967.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Luna de Miel">
-          </div>
-          <h4 class="categoria-nombre">Luna de Miel</h4>
-        </div>
-      </div>
+      <?php endforeach; ?>
 
     </div>
   </div>
