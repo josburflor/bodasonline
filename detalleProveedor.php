@@ -76,8 +76,8 @@ if(isset($_GET['idProveedor'])) {
                         <a href="contacto.php" class="btn text-white px-4 py-3 fw-bold rounded-pill shadow-sm flex-grow-1 flex-md-grow-0" style="background-color: #233d90;">
                             <i class="far fa-envelope me-2"></i> Solicitar Información Gratuita
                         </a>
-                        <a href="admin.php" class="btn btn-outline-secondary px-4 py-3 fw-bold rounded-pill flex-grow-1 flex-md-grow-0">
-                            Volver al Listado
+                        <a href="index.php" class="btn btn-outline-secondary px-4 py-3 fw-bold rounded-pill flex-grow-1 flex-md-grow-0">
+                            Volver al Inicio
                         </a>
                     </div>
                 </div>

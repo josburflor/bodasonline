@@ -353,7 +353,7 @@ $trajes = $sentenciaTrajes->fetchAll(PDO::FETCH_ASSOC);
           <div class="blog-card-wrapper">
            <div class="blog-foto" style="background-image: url('img/momentosbodas.jpg')">
               <div class="blog-overlay">
-                <a href="#" class="btn-ver-mas-center">Ver más</a>
+                <a href="articulo.php?id=1" class="btn-ver-mas-center">Ver más</a>
               </div>
             </div>
           </div>
@@ -365,7 +365,7 @@ $trajes = $sentenciaTrajes->fetchAll(PDO::FETCH_ASSOC);
           <div class="blog-card-wrapper">
             <div class="blog-foto" style="background-image: url('img/zapatos.jpg')">
               <div class="blog-overlay">
-                <a href="#" class="btn-ver-mas-center">Ver más</a>
+                <a href="articulo.php?id=2" class="btn-ver-mas-center">Ver más</a>
               </div>
             </div>
           </div>
@@ -377,7 +377,7 @@ $trajes = $sentenciaTrajes->fetchAll(PDO::FETCH_ASSOC);
           <div class="blog-card-wrapper">
             <div class="blog-foto" style="background-image: url('img/celebracion.jpg')">
               <div class="blog-overlay">
-                <a href="#" class="btn-ver-mas-center">Ver más</a>
+                <a href="articulo.php?id=3" class="btn-ver-mas-center">Ver más</a>
               </div>
             </div>
           </div>
@@ -389,7 +389,7 @@ $trajes = $sentenciaTrajes->fetchAll(PDO::FETCH_ASSOC);
           <div class="blog-card-wrapper">
             <div class="blog-foto" style="background-image: url('img/vestidotienda.jpg')">
               <div class="blog-overlay">
-                <a href="#" class="btn-ver-mas-center">Ver más</a>
+                <a href="articulo.php?id=4" class="btn-ver-mas-center">Ver más</a>
               </div>
             </div>
           </div>
@@ -401,7 +401,7 @@ $trajes = $sentenciaTrajes->fetchAll(PDO::FETCH_ASSOC);
           <div class="blog-card-wrapper">
             <div class="blog-foto" style="background-image: url('img/maquillaje.jpg')">
               <div class="blog-overlay">
-                <a href="#" class="btn-ver-mas-center">Ver más</a>
+                <a href="articulo.php?id=5" class="btn-ver-mas-center">Ver más</a>
               </div>
             </div>
           </div>
@@ -413,7 +413,7 @@ $trajes = $sentenciaTrajes->fetchAll(PDO::FETCH_ASSOC);
           <div class="blog-card-wrapper">
            <div class="blog-foto" style="background-image: url('img/LUNADEMIEL.jpg')">
               <div class="blog-overlay">
-                <a href="#" class="btn-ver-mas-center">Ver más</a>
+                <a href="articulo.php?id=6" class="btn-ver-mas-center">Ver más</a>
               </div>
             </div>
           </div>
@@ -425,7 +425,7 @@ $trajes = $sentenciaTrajes->fetchAll(PDO::FETCH_ASSOC);
           <div class="blog-card-wrapper">
             <div class="blog-foto" style="background-image: url('img/FOTOBODA.jpg')">
               <div class="blog-overlay">
-                <a href="#" class="btn-ver-mas-center">Ver más</a>
+                <a href="articulo.php?id=7" class="btn-ver-mas-center">Ver más</a>
               </div>
             </div>
           </div>
@@ -437,7 +437,7 @@ $trajes = $sentenciaTrajes->fetchAll(PDO::FETCH_ASSOC);
           <div class="blog-card-wrapper">
            <div class="blog-foto" style="background-image: url('img/inivtaciones.jpg')">
               <div class="blog-overlay">
-                <a href="#" class="btn-ver-mas-center">Ver más</a>
+                <a href="articulo.php?id=8" class="btn-ver-mas-center">Ver más</a>
               </div>
             </div>
           </div>
@@ -580,7 +580,7 @@ $trajes = $sentenciaTrajes->fetchAll(PDO::FETCH_ASSOC);
         <div class="item-carrusel">
           <div class="card-wrapper-blog">
             <div class="foto-blog" style="background-image: url('img/italia.jpg')">
-              <div class="overlay-blog"><a href="#" class="btn-ver-mas-blog">Ver más</a></div>
+              <div class="overlay-blog"><a href="destino.php?id=1" class="btn-ver-mas-blog">Ver más</a></div>
             </div>
           </div>
           <h3 class="pie-titulo text-center">Italia</h3>
@@ -588,7 +588,7 @@ $trajes = $sentenciaTrajes->fetchAll(PDO::FETCH_ASSOC);
         <div class="item-carrusel">
           <div class="card-wrapper-blog">
              <div class="foto-blog" style="background-image: url('img/brazil.jpg')">
-              <div class="overlay-blog"><a href="#" class="btn-ver-mas-blog">Ver más</a></div>
+              <div class="overlay-blog"><a href="destino.php?id=2" class="btn-ver-mas-blog">Ver más</a></div>
             </div>
           </div>
           <h3 class="pie-titulo text-center">Brasil</h3>
@@ -596,7 +596,7 @@ $trajes = $sentenciaTrajes->fetchAll(PDO::FETCH_ASSOC);
         <div class="item-carrusel">
           <div class="card-wrapper-blog">
             <div class="foto-blog" style="background-image: url('img/francia.jpg')">
-              <div class="overlay-blog"><a href="#" class="btn-ver-mas-blog">Ver más</a></div>
+              <div class="overlay-blog"><a href="destino.php?id=3" class="btn-ver-mas-blog">Ver más</a></div>
             </div>
           </div>
           <h3 class="pie-titulo text-center">Francia</h3>
@@ -604,7 +604,7 @@ $trajes = $sentenciaTrajes->fetchAll(PDO::FETCH_ASSOC);
         <div class="item-carrusel">
           <div class="card-wrapper-blog">
              <div class="foto-blog" style="background-image: url('img/grecia.jpg')">
-              <div class="overlay-blog"><a href="#" class="btn-ver-mas-blog">Ver más</a></div>
+              <div class="overlay-blog"><a href="destino.php?id=4" class="btn-ver-mas-blog">Ver más</a></div>
             </div>
           </div>
           <h3 class="pie-titulo text-center">Grecia</h3>
@@ -612,7 +612,7 @@ $trajes = $sentenciaTrajes->fetchAll(PDO::FETCH_ASSOC);
         <div class="item-carrusel">
           <div class="card-wrapper-blog">
             <div class="foto-blog" style="background-image: url('img/mexico.jpg')">
-              <div class="overlay-blog"><a href="#" class="btn-ver-mas-blog">Ver más</a></div>
+              <div class="overlay-blog"><a href="destino.php?id=5" class="btn-ver-mas-blog">Ver más</a></div>
             </div>
           </div>
           <h3 class="pie-titulo text-center">México</h3>
@@ -620,7 +620,7 @@ $trajes = $sentenciaTrajes->fetchAll(PDO::FETCH_ASSOC);
         <div class="item-carrusel">
           <div class="card-wrapper-blog">
             <div class="foto-blog" style="background-image: url('img/bali.jpg')">
-              <div class="overlay-blog"><a href="#" class="btn-ver-mas-blog">Ver más</a></div>
+              <div class="overlay-blog"><a href="destino.php?id=6" class="btn-ver-mas-blog">Ver más</a></div>
             </div>
           </div>
           <h3 class="pie-titulo text-center">Bali</h3>
@@ -628,7 +628,7 @@ $trajes = $sentenciaTrajes->fetchAll(PDO::FETCH_ASSOC);
         <div class="item-carrusel">
           <div class="card-wrapper-blog">
             <div class="foto-blog" style="background-image: url('img/japon.jpg')">
-              <div class="overlay-blog"><a href="#" class="btn-ver-mas-blog">Ver más</a></div>
+              <div class="overlay-blog"><a href="destino.php?id=7" class="btn-ver-mas-blog">Ver más</a></div>
             </div>
           </div>
           <h3 class="pie-titulo text-center">Japón</h3>
@@ -636,7 +636,7 @@ $trajes = $sentenciaTrajes->fetchAll(PDO::FETCH_ASSOC);
         <div class="item-carrusel">
           <div class="card-wrapper-blog">
             <div class="foto-blog" style="background-image: url('img/marreucos.jpg')">
-              <div class="overlay-blog"><a href="#" class="btn-ver-mas-blog">Ver más</a></div>
+              <div class="overlay-blog"><a href="destino.php?id=8" class="btn-ver-mas-blog">Ver más</a></div>
             </div>
           </div>
           <h3 class="pie-titulo text-center">Marruecos</h3>
