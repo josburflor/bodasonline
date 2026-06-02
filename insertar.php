@@ -1,5 +1,6 @@
 <?php 
 require_once("conexion.php");
+require_once("seguridad.php");
 
 // Recuperar las categorías activas para renderizar dinámicamente el selector
 $consultaCategorias = "SELECT * FROM categoriastb";

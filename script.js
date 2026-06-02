@@ -415,7 +415,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnEntrar = document.getElementById('btnEntrar');
 
   if (modal && closeX && btnEntrar) {
+    // Si el usuario ya cerró el modal en esta sesión, lo ocultamos de inmediato
+    if (sessionStorage.getItem('welcomeModalShown') === 'true') {
+      modal.style.display = 'none';
+    }
+
     function cerrarModal() {
+      // Guardamos en la sesión del navegador que ya se ha visto el modal de bienvenida
+      sessionStorage.setItem('welcomeModalShown', 'true');
+
       modal.style.opacity = '0';
       setTimeout(() => {
         modal.style.display = 'none';

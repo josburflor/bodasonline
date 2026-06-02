@@ -1,5 +1,6 @@
 <?php 
 require_once("conexion.php");
+require_once("seguridad.php");
 
 $tab = $_GET['tab'] ?? 'proveedores';
 
@@ -58,7 +59,12 @@ if ($tab == 'proveedores') {
 
 <div style="max-width: 1100px; margin: 30px auto; padding: 0 15px; font-family: sans-serif;">
 
-    <h1 style="margin-bottom: 5px;">Panel de Administración</h1>
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 10px;">
+        <h1 style="margin: 0; font-family: sans-serif; font-weight: 700; color: #1a2b56;">Panel de Administración</h1>
+        <a href="logout.php" style="padding: 10px 18px; background-color: #dc3545; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 8px; transition: all 0.2s; box-shadow: 0 4px 6px rgba(220, 53, 69, 0.2);" onmouseover="this.style.backgroundColor='#bd2130'; this.style.transform='translateY(-1px)';" onmouseout="this.style.backgroundColor='#dc3545'; this.style.transform='none';">
+            <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+        </a>
+    </div>
     <p style="color: #666; margin-bottom: 20px;">Gestiona proveedores, rutas románticas y colección de trajes.</p>
 
     <!-- Navegación entre pestañas -->

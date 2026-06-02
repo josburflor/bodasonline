@@ -1,5 +1,6 @@
 <?php 
 require_once("conexion.php");
+require_once("seguridad.php");
 
 if(!isset($_GET['idRuta'])) {
     header("Location: admin.php?tab=rutas");

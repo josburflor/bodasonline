@@ -1,5 +1,6 @@
 <?php 
 require_once("conexion.php");
+require_once("seguridad.php");
 
 if(!isset($_GET['idTraje'])) {
     header("Location: admin.php?tab=trajes");

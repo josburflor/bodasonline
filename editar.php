@@ -1,5 +1,6 @@
 <?php 
 require_once("conexion.php");
+require_once("seguridad.php");
 
 // 1. Validar que exista el identificador del proveedor
 if(!isset($_GET['idProveedor'])) {

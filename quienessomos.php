@@ -9,12 +9,12 @@
         
         <!-- Columna Izquierda: Imagen de Pareja -->
         <div class="col-md-6">
-            <div class="rounded-3 overflow-hidden shadow-lg border-0">
+            <div class="rounded-3 overflow-hidden shadow-lg border-0 bg-white">
                 <img 
                     src="img/somos.jpg" 
                     alt="Pareja planificando su boda" 
-                    class="img-fluid w-100 h-auto object-cover"
-                    style="max-height: 500px;"
+                    class="img-fluid w-100 h-auto"
+                    style="display: block;"
                 >
             </div>
         </div>

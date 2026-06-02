@@ -1,5 +1,6 @@
 <?php 
 require_once("conexion.php");
+require_once("seguridad.php");
 
 if($_POST) {
     $nombreTraje = $_POST['nombreTraje'];
