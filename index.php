@@ -227,7 +227,7 @@ $trajes = $sentenciaTrajes->fetchAll(PDO::FETCH_ASSOC);
             <div class="card-body">
               <h5 class="card-title fw-semibold">Jardín Los Olivos</h5>
               <p class="card-text text-secondary">Fotos espectaculares, opiniones 5★</p>
-              <a href="#" class="btn btn-outline-rosado btn-sm">Ver espacio</a>
+              <a href="espacio.php?id=1" class="btn btn-outline-rosado btn-sm">Ver espacio</a>
             </div>
           </div>
         </div>
@@ -237,7 +237,7 @@ $trajes = $sentenciaTrajes->fetchAll(PDO::FETCH_ASSOC);
             <div class="card-body">
               <h5 class="card-title fw-semibold">Salón Mirador</h5>
               <p class="card-text text-secondary">Elegante, opiniones 4.8★</p>
-              <a href="#" class="btn btn-outline-rosado btn-sm">Ver espacio</a>
+              <a href="espacio.php?id=2" class="btn btn-outline-rosado btn-sm">Ver espacio</a>
             </div>
           </div>
         </div>
@@ -247,7 +247,7 @@ $trajes = $sentenciaTrajes->fetchAll(PDO::FETCH_ASSOC);
             <div class="card-body">
               <h5 class="card-title fw-semibold">Hacienda Santa María</h5>
               <p class="card-text text-secondary">Rústico, piscina, opiniones 4.9★</p>
-              <a href="#" class="btn btn-outline-rosado btn-sm">Ver espacio</a>
+              <a href="espacio.php?id=3" class="btn btn-outline-rosado btn-sm">Ver espacio</a>
             </div>
           </div>
         </div>
@@ -814,7 +814,7 @@ $trajes = $sentenciaTrajes->fetchAll(PDO::FETCH_ASSOC);
 <!-- ALERT -->
 
 <!-- Modal de Bienvenida -->
-    <div class="modal-overlay" id="welcomeModal">
+    <div class="modal-overlay" id="welcomeModal" style="display: none;">
         <div class="modal-container">
             <button class="modal-close-x" id="closeX"><i class="fas fa-times"></i></button>
             

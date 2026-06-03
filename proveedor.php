@@ -54,7 +54,7 @@
                                     <i class="far fa-eye password-toggle position-absolute top-50 end-0 translate-middle-y me-3" style="cursor: pointer;"></i>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-primary w-100 py-2 fw-bold mb-3" style="background-color: var(--bo-blue-button); border-radius: 10px; border: none;">Acceder al Panel</button>
+                            <button type="button" class="btn btn-primary w-100 py-2 fw-bold mb-3" style="background-color: #233d90; border-radius: 10px; border: none;" onclick="window.location.href='panelproveedor.php'">Acceder al Panel</button>
                             <div class="footer-links d-flex justify-content-between small">
                                 <a href="#" class="text-decoration-none text-secondary">¿Olvidó su contraseña?</a>
                                 <a href="#" class="text-decoration-none text-primary fw-bold">Soporte Empresas</a>
@@ -88,7 +88,7 @@
                                 <input type="tel" class="form-control" placeholder="600 000 000">
                             </div>
                             <div class="col-12 mt-4">
-                                <button type="button" class="btn btn-primary w-100 py-2 fw-bold" style="background-color: var(--bo-blue-button); border-radius: 10px; border: none;">Solicitar Registro</button>
+                                <button type="button" class="btn btn-primary w-100 py-2 fw-bold" style="background-color: #233d90; border-radius: 10px; border: none;" onclick="window.location.href='panelproveedor.php'">Solicitar Registro</button>
                             </div>
                         </form>
                     </div>

@@ -415,26 +415,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnEntrar = document.getElementById('btnEntrar');
 
   if (modal && closeX && btnEntrar) {
-    // Si el usuario ya cerró el modal en esta sesión, lo ocultamos de inmediato
-    if (sessionStorage.getItem('welcomeModalShown') === 'true') {
-      modal.style.display = 'none';
+    // Si el usuario NO ha cerrado el modal anteriormente en este navegador, lo mostramos
+    if (localStorage.getItem('welcomeModalShown') !== 'true') {
+      modal.style.display = 'flex';
     }
 
-    function cerrarModal() {
-      // Guardamos en la sesión del navegador que ya se ha visto el modal de bienvenida
-      sessionStorage.setItem('welcomeModalShown', 'true');
+    function procesarEntrada() {
+      // Guardamos de forma permanente en el navegador que ya se ha visto el modal de bienvenida
+      localStorage.setItem('welcomeModalShown', 'true');
 
       modal.style.opacity = '0';
       setTimeout(() => {
         modal.style.display = 'none';
+        // Redirigimos al usuario directamente a la página de registro/acceso
+        window.location.href = 'usuario.php';
       }, 500);
     }
 
-    closeX.addEventListener('click', cerrarModal);
-    btnEntrar.addEventListener('click', cerrarModal);
+    closeX.addEventListener('click', procesarEntrada);
+    btnEntrar.addEventListener('click', procesarEntrada);
 
     modal.addEventListener('click', (e) => {
-      if (e.target === modal) cerrarModal();
+      if (e.target === modal) procesarEntrada();
     });
   }
 });
